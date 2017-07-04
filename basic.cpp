@@ -6,6 +6,8 @@ struct CellId {
     Id id;
 };
 
+namespace {
+
 class TestCellId : public ::testing::Test
 {
 protected:
@@ -28,9 +30,10 @@ TEST(Toto,Test)
 
 TEST_F(TestCellId,NegativeCellId)
 {
-    testCellId->id = -1;
-    ASSERT_TRUE(testCellId->id<0);
-    EXPECT_EQ(testCellId->id,-1);
+    int & cellId = testCellId->id;
+    cellId = -1;
+    ASSERT_TRUE(cellId<0);
+    EXPECT_EQ(cellId,-1);
 }
 
 TEST_F(TestCellId,PositiveCellId)
@@ -41,8 +44,24 @@ TEST_F(TestCellId,PositiveCellId)
     EXPECT_EQ(cellId,10);
 }
 
+TEST_F(TestCellId,DISABLED_ZeroCellId)
+{
+    int & cellId = testCellId->id;
+    cellId = 0;
+    int* badptr = nullptr;
+    *badptr = 2;
+    ASSERT_TRUE(cellId == 0);
+}
+
+} // namespace
+
 int main(int argc, char* argv[])
 {
-    testing::InitGoogleTest(&argc, argv);
+    ::testing::GTEST_FLAG(print_time) = false;
+    ::testing::GTEST_FLAG(color) = "no";
+    ::testing::GTEST_FLAG(repeat) = 3;
+    ::testing::GTEST_FLAG(output) = "xml";
+    //::testing::GTEST_FLAG(catch_exceptions)=0;
+    ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

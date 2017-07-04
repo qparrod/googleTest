@@ -1,15 +1,15 @@
 EXEC = test
 
-#COMPILE_OPTION= -Wall -g -O3
+COMPILE_OPTION= -Wall -g -O3 -std=c++11
 CC=g++ $(COMPILE_OPTION)
 
 CPPFLAGS+=-I/opt/gtest/x86_64/1.7.0-1/include
 SRC += basic.cpp
 LDLIBS = -pthread /opt/gtest/x86_64/1.7.0-1/lib/libgtest.a
 
-all: $(EXEC)
+all: run $(EXEC)
 
-run:
+run: $(EXEC)
 	@echo "--------------- Start Test ---------------"
 	./$(EXEC)
 
