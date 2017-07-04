@@ -1,15 +1,8 @@
 #include <gtest/gtest.h>
 
 template <typename Id>
-struct CellId
-{
-public:
+struct CellId {
     CellId() : id(0) {}
-
-    Id get() { return id; }
-    void set(Id newId) { id = newId; }
-
-private:
     Id id;
 };
 
@@ -30,14 +23,14 @@ protected:
 TEST(Toto,Test)
 {
     ASSERT_TRUE(0==-1);
-    ASSERT_FALSE(1=="toto");
+    ASSERT_FALSE(1==1);
 }
 
 TEST_F(TestCellId,NegativeCellId)
 {
-    testCellId->set(-1);
-    ASSERT_TRUE(testCellId->get()<0);
-    EXPECT_EQ(testCellId->get(),-1);
+    testCellId->id = -1;
+    ASSERT_TRUE(testCellId->id<0);
+    EXPECT_EQ(testCellId->id,-1);
 }
 
 int main(int argc, char* argv[])
