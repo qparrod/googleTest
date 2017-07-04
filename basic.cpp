@@ -33,6 +33,14 @@ TEST_F(TestCellId,NegativeCellId)
     EXPECT_EQ(testCellId->id,-1);
 }
 
+TEST_F(TestCellId,PositiveCellId)
+{
+    int & cellId = testCellId->id;
+    cellId = 10;
+    ASSERT_TRUE(cellId > 0);
+    EXPECT_EQ(cellId,10);
+}
+
 int main(int argc, char* argv[])
 {
     testing::InitGoogleTest(&argc, argv);
