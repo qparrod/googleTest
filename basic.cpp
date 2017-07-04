@@ -25,6 +25,7 @@ protected:
 TEST(Toto,Test)
 {
     ASSERT_TRUE(0==-1);
+    SCOPED_TRACE("A");
     ASSERT_FALSE(1==1);
 }
 
@@ -57,11 +58,6 @@ TEST_F(TestCellId,DISABLED_ZeroCellId)
 
 int main(int argc, char* argv[])
 {
-    ::testing::GTEST_FLAG(print_time) = false;
-    ::testing::GTEST_FLAG(color) = "no";
-    ::testing::GTEST_FLAG(repeat) = 3;
-    ::testing::GTEST_FLAG(output) = "xml";
-    //::testing::GTEST_FLAG(catch_exceptions)=0;
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

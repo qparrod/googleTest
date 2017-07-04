@@ -1,5 +1,3 @@
-EXEC = test
-
 COMPILE_OPTION= -Wall -g -O3 -std=c++11
 CC=g++ $(COMPILE_OPTION)
 
@@ -7,16 +5,20 @@ CPPFLAGS+=-I/opt/gtest/x86_64/1.7.0-1/include
 SRC += basic.cpp
 LDLIBS = -pthread /opt/gtest/x86_64/1.7.0-1/lib/libgtest.a
 
-all: run $(EXEC)
+all: runbasic rundeath basictest deathtest flagstest
 
-run: $(EXEC)
-	@echo "--------------- Start Test ---------------"
-	./$(EXEC)
 
-test: basic.o
-	@echo "--------------- Linking ---------------"
+flagtest: flag.o
 	$(CC) -o $@ $^ $(LDLIBS)
-	make run
+	./flagtest
+
+deathtest: death.o
+	$(CC) -o $@ $^ $(LDLIBS)
+	./deathtest
+
+basictest: basic.o
+	$(CC) -o $@ $^ $(LDLIBS)
+	./basictest
 
 %.o: %.cpp
 	@echo "--------------- Compiling $@ ---------------"
@@ -24,4 +26,5 @@ test: basic.o
 
 clean:
 	rm -rf *.o
-	rm $(EXEC)
+	rm -rf *test
+
